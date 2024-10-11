@@ -27,19 +27,16 @@ import "@reclaimprotocol/verifier-solidity-sdk/contracts/Addresses.sol";
 
 contract Attestor {
    address public reclaimAddress;
-   // Add providersHashes for your permitted providers
-   string[] public providersHashes;
 
-   constructor(string[] memory _providersHashes) {
-      providersHashes = _providersHashes;
-      // TODO: Replace with the network you are deploying on
-      reclaimAddress = Addresses.ETHEREUM;
+   constructor() {
+      // Replace with the network you are deploying on
+      reclaimAddress = Addresses.PLOYGON_MUMBAI_TESTNET; 
    }
 
    function verifyProof(Reclaim.Proof memory proof) public view {
        Reclaim(reclaimAddress).verifyProof(proof);
-       // TODO: Your business logic upon successful proof verification
-       // e.g., verify proof.context is what you expect
+       // Your business logic upon successful verification
+       // Example: Verify that proof.context matches your expectations
    }
 }
 ```
