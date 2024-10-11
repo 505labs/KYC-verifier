@@ -2,7 +2,7 @@ import { randomBytes } from "crypto";
 import { BigNumber, Signer, Wallet } from "ethers";
 // import { ethers, upgrades } from "hardhat";
 import type {} from "../hardhat.config";
-import { Reclaim, SchemaRegistry, Semaphore } from "../src/types";
+import { Reclaim, SchemaRegistry } from "../src/types";
 import type {} from "../src/types/hardhat";
 import fs from "fs";
 import { HardhatEthersHelpers } from "hardhat/types";
@@ -39,8 +39,8 @@ export async function deployReclaimContract(
   signer?: Signer
 ) {
   const factory = await ethers.getContractFactory("Reclaim", signer);
-  
-  let reclaim = await factory.deploy() as Reclaim;
+
+  let reclaim = (await factory.deploy()) as Reclaim;
 
   //   await reclaim.initialize();
   if (signer) {
