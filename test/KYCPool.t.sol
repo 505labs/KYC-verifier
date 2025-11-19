@@ -16,6 +16,9 @@ contract KYCPoolTest is Test {
     event Deposit(address indexed user, uint256 amount, uint256 totalDeposit);
     event Withdrawal(address indexed user, uint256 amount, uint256 remainingDeposit);
 
+    // Allow test contract to receive ETH
+    receive() external payable {}
+
     function setUp() public {
         owner = address(this);
         kycUser = address(0x1);
@@ -168,10 +171,12 @@ contract KYCPoolTest is Test {
         vm.prank(kycUser);
         pool.deposit{value: depositAmount}();
         
-        uint256 ownerBalance = owner.balance;
+        uint256 ownerBalanceBefore = owner.balance;
+        uint256 poolBalanceBefore = address(pool).balance;
+        
         pool.emergencyWithdraw();
         
-        assertEq(owner.balance, ownerBalance + depositAmount);
+        assertEq(owner.balance, ownerBalanceBefore + poolBalanceBefore);
         assertEq(address(pool).balance, 0);
     }
 
