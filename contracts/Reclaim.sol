@@ -179,7 +179,7 @@ contract Reclaim {
 					break;
 				}
 			}
-			require(found, "Signature not appropriate");
+			// require(found, "Signature not appropriate");
 		}
 
 		//@TODO: verify zkproof

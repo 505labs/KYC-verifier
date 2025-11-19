@@ -1,52 +1,66 @@
-# @reclaimprotocol/verifier-solidity-sdk
+## Foundry
 
-A verifier-oriented version of Reclaim's Solidity SDK, designed to make deploying and verifying Reclaim contracts easier.
+**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
-## Overview
+Foundry consists of:
 
-`@reclaimprotocol/verifier-solidity-sdk` allows you to deploy a Reclaim contract that can be used to verify proofs in your Solidity smart contracts. This SDK is tailored specifically for verifiers who want to integrate Reclaim proof verification into their Ethereum or EVM-compatible smart contracts.
+- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
+- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
+- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
+- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
 
-## Installation
+## Documentation
 
-Start using `@reclaimprotocol/verifier-solidity-sdk` in your project by running:
-
-```bash
-npm i @reclaimprotocol/verifier-solidity-sdk
-```
+https://book.getfoundry.sh/
 
 ## Usage
 
-Below is an example of how to use the SDK to deploy a Reclaim contract and verify proofs:
+### Build
 
-```
-// SPDX-License-Identifier: MIT
-pragma solidity 0.8.20;
-
-import "@reclaimprotocol/verifier-solidity-sdk/contracts/Reclaim.sol";
-import "@reclaimprotocol/verifier-solidity-sdk/contracts/Addresses.sol";
-
-contract Attestor {
-   address public reclaimAddress;
-
-   constructor() {
-      // Replace with the network you are deploying on
-      reclaimAddress = Addresses.PLOYGON_MUMBAI_TESTNET; 
-   }
-
-   function verifyProof(Reclaim.Proof memory proof) public view {
-       Reclaim(reclaimAddress).verifyProof(proof);
-       // Your business logic upon successful verification
-       // Example: Verify that proof.context matches your expectations
-   }
-}
+```shell
+$ forge build
 ```
 
-### Key Features
+### Test
 
-- **Verifier Oriented**: Tailored specifically for users who want to verify Reclaim proofs.
-- **Easy Network Configuration**: Use predefined network addresses (e.g., `Addresses.ETHEREUM`).
-- **Proof Verification**: Easily integrate Reclaim proof verification in your contracts.
+```shell
+$ forge test
+```
 
-### Addresses
+### Format
 
-The package includes a list of predefined addresses for different networks that you can use when deploying your contract. You can find these in `contracts/Addresses.sol` or preferably in [Reclaim Documentation](https://docs.reclaimprotocol.org/solidity/supported-networks)
+```shell
+$ forge fmt
+```
+
+### Gas Snapshots
+
+```shell
+$ forge snapshot
+```
+
+### Anvil
+
+```shell
+$ anvil
+```
+
+### Deploy
+
+```shell
+$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+```
+
+### Cast
+
+```shell
+$ cast <subcommand>
+```
+
+### Help
+
+```shell
+$ forge --help
+$ anvil --help
+$ cast --help
+```
